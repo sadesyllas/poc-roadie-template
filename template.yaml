@@ -1,0 +1,62 @@
+---
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: poc-trigger-gitlab-pipeline
+  title: PoC Gitlab Pipeline on Entity
+  description: Selects an entity and triggers a Gitlab pipeline for it.
+spec:
+  owner: roadie
+  type: template
+  parameters:
+    - title: Select entity
+      properties:
+        entity:
+          title: Target
+          type: string
+          description: The entity to target for the Gitlab pipeline
+          ui:field: entityPicker
+          ui:options:
+            allowedKinds:
+              - System
+              - Component
+    - title: Select pipeline type
+      properties:
+        action:
+          title: Action
+          type: string
+          description: The action to carry out
+          enum:
+            - ExplodingBarrels
+            - StuffingAnimals
+          default: ExplodingBarrels
+
+  steps:
+    # - id: location
+    #   name: Get Root Location
+    #   action: http:backstage:request
+    #   input:
+    #     method: 'GET'
+    #     path: '/catalog/entities?filter=spec.target=${{ parameters["catalog-info-url"] | replace("/tree/", "/blob/") }}&filter=metadata.annotations.backstage.io/managed-by-location=url:${{ parameters["catalog-info-url"] | replace("/blob/", "/tree/") }}&fields=metadata.uid,metadata.name'
+    # - id: parse
+    #   name: Parse entities response
+    #   if: ${{ steps.location.output.code === 200 }}
+    #   action: roadiehq:utils:jsonata
+    #   input:
+    #     data: ${{ steps.location.output.body }}
+    #     expression: '$.metadata.uid'
+    # - id: parseNames
+    #   name: Parse entity names
+    #   if: ${{ steps.location.output.code === 200 }}
+    #   action: roadiehq:utils:jsonata
+    #   input:
+    #     data: ${{ steps.location.output.body }}
+    #     expression: '$.metadata.name'
+    - id: log-to-delete
+      action: debug:log
+      input:
+        message: 'Triggered action ${{ parameters.action }} on entity ${{ parameters.entity }}'
+
+
+  output:
+    result: 'Triggered action ${{ parameters.action }} on entity ${{ parameters.entity }}'
