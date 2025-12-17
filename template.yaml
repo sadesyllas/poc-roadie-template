@@ -18,7 +18,7 @@ spec:
           ui:field: entityPicker
           ui:options:
             catalogFilter:
-              kind: System
+              kind: [System, Component]
     - title: Select pipeline type
       properties:
         action:
