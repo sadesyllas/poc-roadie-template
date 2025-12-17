@@ -18,7 +18,8 @@ spec:
             path: "catalog/entities"
             params:
               filter: 'kind=system'
-            valueSelector: 'metadata.annotations."gitlab.com/project-id"'
+            valueSelector: 'metadata.annotations."name"'
+            # valueSelector: 'metadata.annotations."gitlab.com/project-id"'
             labelSelector: 'metadata.name'
           required: true
 
