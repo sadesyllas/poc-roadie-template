@@ -55,7 +55,7 @@ spec:
       name: Output Pipeline URL
       action: debug:log
       input:
-        message: Pipeline triggered! URL: ${{ steps.trigger-pipeline.output.pipelineUrl }}
+        message: 'Pipeline triggered! URL: ${{ steps.trigger-pipeline.output.pipelineUrl }}'
 
   output:
     # The pipelineUrl output is useful for linking back to the created pipeline run
