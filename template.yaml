@@ -17,9 +17,8 @@ spec:
           description: The entity to target for the Gitlab pipeline
           ui:field: entityPicker
           ui:options:
-            allowedKinds:
-              - System
-              - Component
+            catalogFilter:
+              kind: System
     - title: Select pipeline type
       properties:
         action:
