@@ -19,7 +19,8 @@ spec:
             params:
               filter: 'kind=system'
             valueSelector:
-              editor: metadata.annotations['gitlab.com/project-id']
+              editor: metadata.name
+              # editor: metadata.annotations['gitlab.com/project-id']
             labelSelector: 'metadata.name'
           required: true
 
