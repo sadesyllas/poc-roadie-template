@@ -13,13 +13,13 @@ spec:
       properties:
         projectId:
           type: string
-          ui:field: SelectFieldFromApi
+          ui:field: SelectFieldFromApix
           ui:options:
             path: "catalog/entities"
             params:
               filter: 'kind=system,spec.type=service'
             valueSelector: 'metadata.name'
-            labelTemplate: '"10 - "{{item.metadata.namespace}}:{{item.metadata.name}}'
+            labelTemplate: '{{item.metadata.namespace}}:{{item.metadata.name}}'
 
     - title: Select pipeline type
       properties:
