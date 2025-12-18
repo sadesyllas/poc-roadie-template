@@ -17,9 +17,9 @@ spec:
           ui:options:
             path: "catalog/entities"
             params:
-              filter: 'kind=component'
+              filter: 'kind=system'
             valueSelector: 'metadata.name'
-            labelTemplate: '{{item.metadata.namespace}}:{{item.metadata.name}}'
+            labelTemplate: '{{item.metadata.name}}'
 
     - title: Select pipeline type
       properties:
