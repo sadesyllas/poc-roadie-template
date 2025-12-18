@@ -18,7 +18,7 @@ spec:
             path: "catalog/entities"
             params:
               filter: 'kind=system'
-            valueSelector: 'metadata.annotations.gitlab.com/project-id'
+            valueSelector: "metadata.annotations['gitlab.com/project-id']"
             labelTemplate: '{{item.metadata.name}} ({{item.metadata.annotations["gitlab.com/project-id"]}})'
 
     - title: Select pipeline type
