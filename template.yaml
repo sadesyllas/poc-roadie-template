@@ -44,7 +44,7 @@ spec:
         # Alternatively, you can provide a static token directly if necessary (less secure)
         token: 'glptt-WZsb4ExdtRyyxH6-FjzX'
 
-        projectId: ${{ parameters.projectId }}
+        projectId: ${{ parameters.projectId | int }}
         branch: 'roadie.io-poc'
         variables: # Optional variables to pass to the pipeline
           LeActionDePipelino: ${{ parameters.action }}
