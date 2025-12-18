@@ -11,14 +11,14 @@ spec:
   parameters:
     - title: Select project
       properties:
-        projectId:
+        srcEntity:
           type: string
           ui:field: SelectFieldFromApi
           ui:options:
             path: "catalog/entities"
             params:
               filter: 'kind=system'
-            valueSelector: '{{item.metadata.annotations["gitlab.com/project-id"]}}'
+            # valueSelector: 'metadata.name'
             labelTemplate: '{{item.metadata.name}} ({{item.metadata.annotations["gitlab.com/project-id"]}})'
 
     - title: Select pipeline type
@@ -45,7 +45,7 @@ spec:
         # Alternatively, you can provide a static token directly if necessary (less secure)
         token: 'glptt-WZsb4ExdtRyyxH6-FjzX'
 
-        projectId: ${{ parameters.projectId }}
+        projectId: ${{ parameters.srcEntity.metadata.annotations['gitlab.com/project-id'] }}
         branch: 'roadie.io-poc'
         variables: # Optional variables to pass to the pipeline
           LeActionDePipelino: ${{ parameters.action }}
