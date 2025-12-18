@@ -19,7 +19,7 @@ spec:
             params:
               filter: 'kind=system'
             valueSelector: 'metadata.name'
-            labelTemplate: '{{item.metadata.name}}'
+            labelTemplate: '{{item.metadata.name}} ({{item.metadata.annotations.gitlab.com/project-id}})'
 
     - title: Select pipeline type
       properties:
@@ -48,7 +48,7 @@ spec:
         projectId: ${{ parameters.projectId }}
         branch: 'roadie.io-poc'
         variables: # Optional variables to pass to the pipeline
-          LeActionDePipelino: ${{ parameters.actio }}
+          LeActionDePipelino: ${{ parameters.action }}
 
     - id: output
       name: Output Pipeline URL
