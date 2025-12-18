@@ -20,6 +20,7 @@ spec:
               filter: "kind=system,metadata.annotations.gitlab.com/project-id"
             valueSelector: "metadata.annotations['gitlab.com/project-id']"
             labelTemplate: '{{item.metadata.name}} ({{item.metadata.annotations["gitlab.com/project-id"]}})'
+          required: true
 
     - title: Select pipeline type
       properties:
@@ -34,21 +35,21 @@ spec:
           required: true
 
   steps:
-    # - id: trigger-pipeline
-    #   name: Trigger GitLab Pipeline
-    #   action: gitlab:pipeline:trigger
-    #   input:
-    #     # Example using a token description (recommended way for OIDC)
-    #     # The token will be automatically retrieved by Backstage
-    #     # tokenDescription: 'backstage-scaffolder-trigger-token'
+    - id: trigger-pipeline
+      name: Trigger GitLab Pipeline
+      action: gitlab:pipeline:trigger
+      input:
+        # Example using a token description (recommended way for OIDC)
+        # The token will be automatically retrieved by Backstage
+        # tokenDescription: 'backstage-scaffolder-trigger-token'
 
-    #     # Alternatively, you can provide a static token directly if necessary (less secure)
-    #     token: 'glptt-WZsb4ExdtRyyxH6-FjzX'
+        # Alternatively, you can provide a static token directly if necessary (less secure)
+        token: 'glptt-WZsb4ExdtRyyxH6-FjzX'
 
-    #     projectId: ${{ parameters.projectId }}
-    #     branch: 'roadie.io-poc'
-    #     variables: # Optional variables to pass to the pipeline
-    #       LeActionDePipelino: ${{ parameters.action }}
+        projectId: ${{ parameters.projectId }}
+        branch: 'roadie.io-poc'
+        variables: # Optional variables to pass to the pipeline
+          LeActionDePipelino: ${{ parameters.action }}
 
     - id: output
       name: Output Pipeline URL
