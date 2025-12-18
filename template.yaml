@@ -17,11 +17,9 @@ spec:
           ui:options:
             path: "catalog/entities"
             params:
-              filter: 'kind=system'
+              filter: 'kind=component,spec.type=service'
             valueSelector: 'metadata.name'
-            # valueSelector: 'metadata.annotations."gitlab.com/project-id"'
-            labelSelector: '{{item.metadata.name}}'
-          required: true
+            labelTemplate: '{{item.metadata.namespace}}:{{item.metadata.name}}'
 
     - title: Select pipeline type
       properties:
