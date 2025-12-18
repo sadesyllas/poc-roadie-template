@@ -17,7 +17,7 @@ spec:
           ui:options:
             path: "catalog/entities"
             params:
-              filter: 'kind=system'
+              filter: "kind=system,metadata.annotations.gitlab.com/project-id"
             valueSelector: "metadata.annotations['gitlab.com/project-id']"
             labelTemplate: '{{item.metadata.name}} ({{item.metadata.annotations["gitlab.com/project-id"]}})'
 
