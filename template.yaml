@@ -19,7 +19,7 @@ spec:
             params:
               filter: 'kind=system,spec.type=service'
             valueSelector: 'metadata.name'
-            labelTemplate: '1 - {{item.metadata.namespace}}:{{item.metadata.name}}'
+            labelTemplate: '10 - {{item.metadata.namespace}}:{{item.metadata.name}}'
 
     - title: Select pipeline type
       properties:
