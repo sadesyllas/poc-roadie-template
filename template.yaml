@@ -12,7 +12,7 @@ spec:
     - title: Select project
       properties:
         srcEntity:
-          type: string
+          type: object
           ui:field: SelectFieldFromApi
           ui:options:
             path: "catalog/entities"
