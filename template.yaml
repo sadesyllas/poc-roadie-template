@@ -13,7 +13,7 @@ spec:
       properties:
         projectId:
           type: string
-          ui:field: SelectFieldFromApix
+          ui:field: SelectFieldFromApi
           ui:options:
             path: "catalog/entities"
             params:
