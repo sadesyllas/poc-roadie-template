@@ -11,15 +11,15 @@ spec:
   parameters:
     - title: Select project
       properties:
-        projectId:
+        projectSlug:
           type: string
           ui:field: SelectFieldFromApi
           ui:options:
             path: "catalog/entities"
             params:
-              filter: "kind=system,metadata.annotations.gitlab.com/project-id"
-            valueSelector: "metadata.annotations['gitlab.com/project-id']"
-            labelTemplate: '{{item.metadata.name}} ({{item.metadata.annotations["gitlab.com/project-id"]}})'
+              filter: "kind=system,metadata.annotations.gitlab.com/project-slug"
+            valueSelector: "metadata.annotations['gitlab.com/project-slug']"
+            labelTemplate: '{{item.metadata.name}} ({{item.metadata.annotations["gitlab.com/project-slug"]}})'
 
     - title: Select pipeline type
       properties:
@@ -35,26 +35,23 @@ spec:
   steps:
     - id: trigger-pipeline
       name: Trigger GitLab Pipeline
-      action: gitlab:pipeline:trigger
+      action: http:backstage:request
       input:
-        # Example using a token description (recommended way for OIDC)
-        # The token will be automatically retrieved by Backstage
-        # tokenDescription: 'backstage-scaffolder-trigger-token'
-
-        # Alternatively, you can provide a static token directly if necessary (less secure)
-        token: 'glptt-WZsb4ExdtRyyxH6-FjzX'
-
-        projectId: ${{ parameters.projectId | int }}
-        branch: 'roadie.io-poc'
-        variables: # Optional variables to pass to the pipeline
-          LeActionDePipelino: ${{ parameters.action }}
+        method: POST
+        past: '/gitlab/projects/${{ parameters.projectSlug | urlencode }}/trigger/pipeline'
+        headers:
+          Content-Type: 'application/x-www-form-urlencoded'
+        body:
+          ref: 'roadie.io-poc'
+          'variables[TRIGGER]': 'Roadie'
+          token: 'glptt-WZsb4ExdtRyyxH6-FjzX'
 
     - id: output
       name: Output Pipeline URL
       action: debug:log
       input:
-        message: 'Pipeline triggered! URL: ${{ steps.trigger-pipeline.output.pipelineUrl }}'
+        message: "Pipeline triggered! URL: ${{ steps['trigger-pipeline'].output.web_url }}"
 
   output:
     # The pipelineUrl output is useful for linking back to the created pipeline run
-    pipelineUrl: ${{ steps['trigger-pipeline'].output.pipelineUrl }}
+    pipelineUrl: ${{ steps['trigger-pipeline'].output.web_url }}
