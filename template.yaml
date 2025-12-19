@@ -19,7 +19,7 @@ spec:
             params:
               filter: "kind=system,metadata.annotations.gitlab.com/project-id"
             valueSelector: "metadata.annotations['gitlab.com/project-id']"
-            labelTemplate: '{{item.metadata.name}} (id: {{item.metadata.annotations["gitlab.com/project-id"]}})'
+            labelTemplate: '{{item.metadata.name}} ({{item.metadata.annotations["gitlab.com/project-id"]}})'
 
     - title: Select pipeline type
       properties:
@@ -38,7 +38,7 @@ spec:
       action: http:backstage:request
       input:
         method: POST
-        path: 'proxy://gitlab/projects/${{ parameters.projectId }}/trigger/pipeline'
+        path: 'https://gitlab.com/api/v4/projects/${{ parameters.projectId }}/trigger/pipeline'
         headers:
           Content-Type: 'application/x-www-form-urlencoded'
         body:
