@@ -38,7 +38,7 @@ spec:
       action: http:backstage:request
       input:
         method: POST
-        path: '/gitlab/projects/${{ parameters.projectId }}/trigger/pipeline'
+        path: 'https://gitlab.com/api/v4/projects/${{ parameters.projectId }}/trigger/pipeline'
         headers:
           Content-Type: 'application/x-www-form-urlencoded'
         body:
