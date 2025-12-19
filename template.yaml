@@ -11,15 +11,15 @@ spec:
   parameters:
     - title: Select project
       properties:
-        projectSlug:
+        projectId:
           type: string
           ui:field: SelectFieldFromApi
           ui:options:
             path: "catalog/entities"
             params:
-              filter: "kind=system,metadata.annotations.gitlab.com/project-slug"
-            valueSelector: "metadata.annotations['gitlab.com/project-slug']"
-            labelTemplate: '{{item.metadata.name}} ({{item.metadata.annotations["gitlab.com/project-slug"]}})'
+              filter: "kind=system,metadata.annotations.gitlab.com/project-id"
+            valueSelector: "metadata.annotations['gitlab.com/project-id']"
+            labelTemplate: '{{item.metadata.name}} ({{item.metadata.annotations["gitlab.com/project-id"]}})'
 
     - title: Select pipeline type
       properties:
@@ -38,7 +38,7 @@ spec:
       action: http:backstage:request
       input:
         method: POST
-        past: '/gitlab/projects/${{ parameters.projectSlug | urlencode }}/trigger/pipeline'
+        past: '/gitlab/projects/${{ parameters.projectId }}/trigger/pipeline'
         headers:
           Content-Type: 'application/x-www-form-urlencoded'
         body:
